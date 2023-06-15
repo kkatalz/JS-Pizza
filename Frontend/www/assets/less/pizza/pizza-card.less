@@ -1,4 +1,24 @@
+.pizza-badge {
+  background-color: rgb(203, 79, 34);
+  color: @infoBottomHeaderColor;
+  font-weight: bold;
+  border-radius: 4px;
+  position: absolute;
+  top: -8px;
+  right: -15px;
+  padding: 3px 12px;
+  font-size: 20px;
+}
+
+.green-badge {
+  background-color: @green;
+}
+
+
+
 .pizza-card {
+  position: relative;
+
   img {
     max-width: 250px;
   }
@@ -7,4 +27,40 @@
     color: @mainColor;
     background-color: lighten(@mainColor, 45%);
   }
+}
+
+.caption {
+  h3 {
+    background: transparent;
+    color: @badgeColor;
+    font-weight: bold;
+    margin: 0;
+
+  }
+
+  h4 {
+    font-size: 12px;
+    font-weight: bold;
+    color: grey;
+  }
+}
+
+.pizza-price-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    margin: 0px;
+    font-weight: bold;
+  }
+
+}
+
+.pizza-price-info {
+  display: flex;
+  justify-content: space-between;
+
+  padding-inline: 60px;
 }
