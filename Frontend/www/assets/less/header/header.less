@@ -5,7 +5,17 @@
     opacity: .8;
     position: sticky;
     top: 0;
+    float: left;
+    width: 75%;
     z-index: 10;
+
+    @media screen and (max-width: @largeScreen) {
+        width: 65%
+    }
+
+    @media screen and (max-width: @mediumScreen) {
+        width: 55%
+    }
 }
 
 .header-badge-container {
@@ -109,13 +119,13 @@ hr {
     margin-left: auto
 }
 
-@media screen and (max-width:@mediumScreen) {
+@media screen and (max-width:@largeScreen) {
     .header-info-box-text :nth-child(3) {
         display: none
     }
 }
 
-@media screen and (max-width:@smallScreen) {
+@media screen and (max-width:@mediumScreen) {
     .header-info-box-text :nth-child(2) {
         display: none
     }

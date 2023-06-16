@@ -67,7 +67,7 @@
         <div class="col-sm-6 col-md-4">
           <!-- first pizza -->
           <div class="thumbnail pizza-card">
-            <img src="assets/images/pizza_1.jpg" />
+            <img src="assets/images/pizza_7.jpg" class="pizza-card-img" />
 
             <div class="pizza-badge">Нова</div>
             <div class="caption">
@@ -118,7 +118,7 @@
         <!-- second pizza -->
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail pizza-card">
-            <img src="assets/images/pizza_2.jpg" />
+            <img src="assets/images/pizza_2.jpg" class="pizza-card-img" />
 
             <div class="pizza-badge green-badge">Популярна</div>
             <div class="caption">
@@ -169,7 +169,7 @@
         <!-- third pizza -->
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail pizza-card">
-            <img src="assets/images/pizza_3.jpg" />
+            <img src="assets/images/pizza_1.jpg" class="pizza-card-img" />
 
             <div class="caption">
               <h3>Міксовий поло</h3>
@@ -219,7 +219,7 @@
         <!-- fourth pizza -->
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail pizza-card">
-            <img src="assets/images/pizza_4.jpg" />
+            <img src="assets/images/pizza_4.jpg" class="pizza-card-img" />
 
             <div class="caption">
               <h3>Дольче Маре</h3>
@@ -254,7 +254,7 @@
         <!-- fifth pizza -->
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail pizza-card">
-            <img src="assets/images/pizza_8.jpg" />
+            <img src="assets/images/pizza_8.jpg" class="pizza-card-img" />
 
             <div class="caption">
               <h3>Россо Густо</h3>
@@ -327,6 +327,94 @@
       </p>
       <p>Доставка піци не здійснюється</p>
     </footer>
+
+    <!--SIDE WINDOw -->
+    <aside class="aside">
+      <div class="aside-title">
+        <h4 class="main-pizza-title">
+          Замовлення<span class="pizza-title-amount">3</span>
+        </h4>
+        <button type="button" class="clear">Очистити замовлення</button>
+      </div>
+
+      <!-- List of pizzas to order -->
+      <div class="pizza-list">
+        <!-- first pizza -->
+        <div class="pizza-list-item">
+          <img class="pizza-list-item-image" src="assets/images/pizza_2.jpg" />
+          <h4 class="pizza-list-item-title">BBQ (Мала)</h4>
+          <div class="pizza-list-item-icons">
+            <p><img src="./assets//images//size-icon.svg" alt="size" /> 30</p>
+            <p><img src="./assets/images/weight.svg" alt="weight" /> 460</p>
+          </div>
+          <div class="pizza-list-item-price_amount">
+            <h3>556грн</h3>
+            <button class="pizza-list-item-add_delete" type="button">-</button>
+            <h3>4</h3>
+            <button class="pizza-list-item-add_delete green" type="button">
+              +
+            </button>
+            <button class="pizza-list-item-add_delete delete" type="button">
+              +
+            </button>
+          </div>
+        </div>
+        <!-- second pizza -->
+        <div class="pizza-list-item">
+          <img class="pizza-list-item-image" src="assets/images/pizza_4.jpg" />
+          <h4 class="pizza-list-item-title">Россо Густо (Мала)</h4>
+          <div class="pizza-list-item-icons">
+            <p><img src="./assets//images//size-icon.svg" alt="size" /> 30</p>
+            <p><img src="./assets/images/weight.svg" alt="weight" /> 400</p>
+          </div>
+          <div class="pizza-list-item-price_amount">
+            <h3>189грн</h3>
+            <button class="pizza-list-item-add_delete" type="button">-</button>
+            <h3>1</h3>
+            <button class="pizza-list-item-add_delete green" type="button">
+              +
+            </button>
+            <button class="pizza-list-item-add_delete delete" type="button">
+              +
+            </button>
+          </div>
+        </div>
+        <!-- third pizza -->
+
+        <div class="pizza-list-item">
+          <img class="pizza-list-item-image" src="assets/images/pizza_4.jpg" />
+          <h4 class="pizza-list-item-title">Міксовий поло (Велика)</h4>
+          <div class="pizza-list-item-icons">
+            <p><img src="./assets//images//size-icon.svg" alt="size" /> 40</p>
+            <p><img src="./assets/images/weight.svg" alt="weight" /> 780</p>
+          </div>
+          <div class="pizza-list-item-price_amount">
+            <h3>179грн</h3>
+            <button class="pizza-list-item-add_delete" type="button">-</button>
+            <h3>1</h3>
+            <button class="pizza-list-item-add_delete green" type="button">
+              +
+            </button>
+            <button class="pizza-list-item-add_delete delete" type="button">
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--Footer in side panel -->
+      <div class="aside-footer">
+        <div class="aside-footer-title">
+          <h3>Сума замовлення</h3>
+          <h2>924 грн</h2>
+        </div>
+        <div class="order-button">
+          <button type="button" class="btn btn-warning btn-colorized btn-order">
+            Замовити
+          </button>
+        </div>
+      </div>
+    </aside>
 
     <!-- jQuery JavaScript -->
     <script
