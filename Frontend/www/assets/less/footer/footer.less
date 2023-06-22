@@ -11,14 +11,15 @@
 
     width: 75%;
 
-    p {
-        text-align: center;
-        color: gray;
-        padding: 5px;
-
-        margin-bottom: -10px;
-
+    .footer-text {
+        p {
+            text-align: center;
+            color: gray;
+            padding: 5px;
+            margin-bottom: -10px;
+        }
     }
+
 
     //  mediumScreen ||  largeScreen || larger>
     //      55%      ||      65%     ||  75%
@@ -30,4 +31,10 @@
     @media screen and (max-width: @mediumScreen) {
         width: 55%
     }
+
+    @media screen and (max-width: @verySmallScreen) {
+        width: 60%;
+    }
+
+
 }

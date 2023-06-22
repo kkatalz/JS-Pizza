@@ -7,6 +7,7 @@
 @infoTopHeaderColor: rgba(211, 211, 211, 0.545);
 @infoBottomHeaderColor: rgba(255, 255, 255, 0.905);
 @green: rgb(14, 169, 14);
+@extremelySmallScreen: 300px;
 @verySmallScreen: 500px;
 @smallScreen: 650px;
 @mediumScreen: 890px;
@@ -26,4 +27,14 @@ body {
 
     position: relative;
     min-height: 100vh;
+
+
+    @media screen and (max-width:@verySmallScreen) {
+        overflow-x: scroll;
+        width: 190%
+    }
+
+    @media screen and (max-width:@extremelySmallScreen) {
+        width: 350%
+    }
 }
