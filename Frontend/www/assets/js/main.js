@@ -12,29 +12,29 @@ function filterPizza(event) {
   pizzaList.innerHTML = "";
 
   if (filterText === "М'ясні") {
-    pizza_info
-      .filter((pizza) => pizza.type === "М’ясна піца")
-      .forEach((pizza) => createPizzaCart(pizza));
+    addPizzasToPanel(
+      pizza_info.filter((pizza) => pizza.type === "М’ясна піца")
+    );
   } else if (filterText === "З ананасами") {
-    pizza_info
-      .filter((pizza) => pizza.content.pineapple)
-      .forEach((pizza) => createPizzaCart(pizza));
+    addPizzasToPanel(pizza_info.filter((pizza) => pizza.content.pineapple));
   } else if (filterText === "З грибами") {
-    pizza_info
-      .filter((pizza) => pizza.content.mushroom)
-      .forEach((pizza) => createPizzaCart(pizza));
+    addPizzasToPanel(pizza_info.filter((pizza) => pizza.content.mushroom));
   } else if (filterText === "З морепродуктами") {
-    pizza_info
-      .filter((pizza) => pizza.type === "Морська піца")
-      .forEach((pizza) => createPizzaCart(pizza));
+    addPizzasToPanel(
+      pizza_info.filter((pizza) => pizza.type === "Морська піца")
+    );
   } else if (filterText === "Вега") {
-    pizza_info
-      .filter((pizza) => pizza.type === "Вега піца")
-      .forEach((pizza) => createPizzaCart(pizza));
+    addPizzasToPanel(pizza_info.filter((pizza) => pizza.type === "Вега піца"));
   } else {
-    pizza_info.forEach((pizza) => createPizzaCart(pizza));
+    addPizzasToPanel(pizza_info);
   }
 }
+
+const handleFilterAmount = (number) => {
+  const filtersAmount = document.querySelector(".pizza-title-amount");
+
+  filtersAmount.innerHTML = number;
+};
 
 // panel with pizza
 const pizzaList = document.getElementById("pizza_list");
@@ -99,7 +99,7 @@ function getAllValuesSeparatedByComma(obj) {
   console.log(values);
   return values.join(", ");
 }
-var pizza_info = [
+const pizza_info = [
   {
     id: 1,
     icon: "assets/images/pizza_7.jpg",
@@ -276,4 +276,10 @@ var pizza_info = [
   },
 ];
 
-pizza_info.forEach((pizza) => createPizzaCart(pizza));
+// to add and count pizzas
+function addPizzasToPanel(pizzaList) {
+  pizzaList.forEach((pizza) => createPizzaCart(pizza));
+  handleFilterAmount(pizzaList.length);
+}
+
+addPizzasToPanel(pizza_info);
