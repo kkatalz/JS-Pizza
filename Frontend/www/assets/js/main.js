@@ -1,17 +1,44 @@
-function addActiveClass(event) {
+// filters
+const filterElements = document.querySelector(".main-pizza-filters");
+filterElements.addEventListener("click", filterPizza);
+
+function filterPizza(event) {
   const filters = document.querySelectorAll(".main-pizza-filter");
   filters.forEach((element) => {
     element.classList.remove("active");
   });
   event.target.classList.add("active");
+  const filterText = event.target.innerText;
+  pizzaList.innerHTML = "";
+
+  if (filterText === "М'ясні") {
+    pizza_info
+      .filter((pizza) => pizza.type === "М’ясна піца")
+      .forEach((pizza) => createPizzaCart(pizza));
+  } else if (filterText === "З ананасами") {
+    pizza_info
+      .filter((pizza) => pizza.content.pineapple)
+      .forEach((pizza) => createPizzaCart(pizza));
+  } else if (filterText === "З грибами") {
+    pizza_info
+      .filter((pizza) => pizza.content.mushroom)
+      .forEach((pizza) => createPizzaCart(pizza));
+  } else if (filterText === "З морепродуктами") {
+    pizza_info
+      .filter((pizza) => pizza.type === "Морська піца")
+      .forEach((pizza) => createPizzaCart(pizza));
+  } else if (filterText === "Вега") {
+    pizza_info
+      .filter((pizza) => pizza.type === "Вега піца")
+      .forEach((pizza) => createPizzaCart(pizza));
+  } else {
+    pizza_info.forEach((pizza) => createPizzaCart(pizza));
+  }
 }
 
-const filterElements = document.querySelector(".main-pizza-filters");
-filterElements.addEventListener("click", addActiveClass);
-
+// panel with pizza
+const pizzaList = document.getElementById("pizza_list");
 function createPizzaCart(pizza) {
-  const pizzaList = document.getElementById("pizza_list");
-
   const cartItem = `
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail pizza-card">
