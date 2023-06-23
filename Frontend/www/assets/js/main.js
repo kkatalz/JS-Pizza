@@ -1,3 +1,14 @@
+function addActiveClass(event) {
+  const filters = document.querySelectorAll(".main-pizza-filter");
+  filters.forEach((element) => {
+    element.classList.remove("active");
+  });
+  event.target.classList.add("active");
+}
+
+const filterElements = document.querySelector(".main-pizza-filters");
+filterElements.addEventListener("click", addActiveClass);
+
 function createPizzaCart(pizza) {
   const pizzaList = document.getElementById("pizza_list");
 
