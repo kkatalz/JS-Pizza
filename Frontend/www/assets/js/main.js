@@ -59,29 +59,29 @@ function createPizzaCart(pizza) {
             : ``
         }
         <div class="caption">
-          <h3>${pizza.title}</h3>
+          <h3 class="pizza-title">${pizza.title}</h3>
           <h4>${pizza.type}</h4>
           <p>${getAllValuesSeparatedByComma(pizza.content)}</p>
           <div class="pizza-price-info">
           ${
             pizza.small_size
               ? `<div class="pizza-price-container">
-            <p><img src="./assets/images/size-icon.svg" alt="size" /> ${pizza.small_size.size}</p>
-            <p><img src="./assets/images/weight.svg" alt="weight" /> ${pizza.small_size.weight}</p>
-            <h2>${pizza.small_size.price}</h2>
+            <p id="pizza-small-size"><img src="./assets/images/size-icon.svg" alt="size"  /> ${pizza.small_size.size}</p>
+            <p id="pizza-small-weight"><img src="./assets/images/weight.svg" alt="weight"  /> ${pizza.small_size.weight}</p>
+            <h2 id="pizza-small-price">${pizza.small_size.price}</h2>
             <p>грн.</p>
-            <button class="btn btn-warning btn-colorized">Купити</button>
+            <button id="buy-small-pizza" class="btn btn-warning btn-colorized">Купити</button>
           </div>`
               : ``
           }
             ${
               pizza.big_size
                 ? `<div class="pizza-price-container">
-              <p><img src="./assets/images/size-icon.svg" alt="size" /> ${pizza.big_size.size}</p>
-              <p><img src="./assets/images/weight.svg" alt="weight" /> ${pizza.big_size.weight}</p>
-              <h2>${pizza.big_size.price}</h2>
+              <p id="pizza-big-size" ><img src="./assets/images/size-icon.svg" alt="size" /> ${pizza.big_size.size}</p>
+              <p id="pizza-big-weight"><img src="./assets/images/weight.svg" alt="weight" /> ${pizza.big_size.weight}</p>
+              <h2 id="pizza-big-price">${pizza.big_size.price}</h2>
               <p>грн.</p>
-              <button class="btn btn-warning btn-colorized">Купити</button>
+              <button id="buy-big-pizza" class="btn btn-warning btn-colorized">Купити</button>
             </div>`
                 : ``
             }
@@ -92,6 +92,70 @@ function createPizzaCart(pizza) {
   `;
 
   pizzaList.innerHTML += cartItem;
+}
+// add pizza to basket
+function addToBasket() {
+  document.addEventListener("click", (event) => {
+    if (
+      (event.target && event.target.id === "buy-small-pizza") ||
+      event.target.id === "buy-big-pizza"
+    ) {
+      const id = event.target.id;
+
+      const parentNode = event.target.closest(".col-sm-6");
+      const pizzaImgElement = parentNode.querySelector(".pizza-card-img");
+      const pizzaTitleElement = parentNode.querySelector(".pizza-title");
+      const pizzaSizeElement =
+        id === "buy-small-pizza"
+          ? parentNode.querySelector("#pizza-small-size")
+          : parentNode.querySelector("#pizza-big-size");
+
+      const pizzaWeightElement =
+        id === "buy-small-pizza"
+          ? parentNode.querySelector("#pizza-small-weight")
+          : parentNode.querySelector("#pizza-big-weight");
+
+      const pizzaPriceElement =
+        id === "buy-small-pizza"
+          ? parentNode.querySelector("#pizza-small-price")
+          : parentNode.querySelector("#pizza-big-price");
+
+      const imageSrc = pizzaImgElement.getAttribute("src");
+      const pizzaTitle = pizzaTitleElement.innerText;
+      const pizzaSize = pizzaSizeElement.innerText;
+      const pizzaWeight = pizzaWeightElement.innerText;
+      const pizzaPrice = pizzaPriceElement.innerText;
+
+      console.log(pizzaSizeElement);
+      const pizzaAmount = 1;
+
+      const pizzaCardInOrder = `
+      <div class="pizza-list-item">
+            <img class="pizza-list-item-image" src="${imageSrc}" />
+            <h4 class="pizza-list-item-title">${pizzaTitle} (${
+        id === "buy-small-pizza" ? "Мала" : "Велика"
+      })</h4>
+            <div class="pizza-list-item-icons">
+              <p><img src="./assets//images//size-icon.svg" alt="size" />${pizzaSize}</p>
+              <p><img src="./assets/images/weight.svg" alt="weight" />${pizzaWeight}</p>
+            </div>
+            <div class="pizza-list-item-price_amount">
+              <h3>${pizzaPrice}грн</h3>
+              <button class="pizza-list-item-add_delete" type="button">-</button>
+              <h3>${pizzaAmount}</h3>
+              <button class="pizza-list-item-add_delete green" type="button">
+                +
+              </button>
+              <button class="pizza-list-item-add_delete delete" type="button">
+                +
+              </button>
+            </div>
+      </div>
+    `;
+      const pizzaListOrder = document.getElementById("pizza-list-order");
+      pizzaListOrder.innerHTML += pizzaCardInOrder;
+    }
+  });
 }
 
 function getAllValuesSeparatedByComma(obj) {
@@ -283,3 +347,5 @@ function addPizzasToPanel(pizzaList) {
 }
 
 addPizzasToPanel(pizza_info);
+
+addToBasket();
