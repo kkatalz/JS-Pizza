@@ -141,12 +141,12 @@ function addToBasket() {
             </div>
             <div class="pizza-list-item-price_amount">
               <h3>${pizzaPrice}грн</h3>
-              <button class="pizza-list-item-add_delete" type="button">-</button>
+              <button class="pizza-list-item-add_delete" id="decrease-pizza" type="button">-</button>
               <h3>${pizzaAmount}</h3>
-              <button class="pizza-list-item-add_delete green" type="button">
+              <button class="pizza-list-item-add_delete green" id="increase-pizza" type="button">
                 +
               </button>
-              <button class="pizza-list-item-add_delete delete" type="button">
+              <button class="pizza-list-item-add_delete delete" id="remove-pizza" type="button">
                 +
               </button>
             </div>
@@ -340,6 +340,40 @@ const pizza_info = [
   },
 ];
 
+// increase / decrease amount in pizza list order
+function handlePizzaAmount() {
+  document.addEventListener("click", (event) => {
+    if (
+      (event.target && event.target.id === "increase-pizza") ||
+      event.target.id === "decrease-pizza"
+    ) {
+      if (event.target && event.target.id === "decrease-pizza") {
+        const pizzaAmount = event.target.nextElementSibling.innerText;
+        if (pizzaAmount != 1) {
+          event.target.nextElementSibling.innerText = parseInt(pizzaAmount) - 1;
+        } else {
+          const parentNode = event.target.closest(".pizza-list-item");
+          parentNode.remove();
+        }
+      } else {
+        const pizzaAmount = event.target.previousElementSibling.innerText;
+        event.target.previousElementSibling.innerText =
+          parseInt(pizzaAmount) + 1;
+      }
+    }
+  });
+}
+
+// remove pizza from order list
+function handleRemovingPizza() {
+  document.addEventListener("click", (event) => {
+    if (event.target && event.target.id === "remove-pizza") {
+      const parentNode = event.target.closest(".pizza-list-item");
+      parentNode.remove();
+    }
+  });
+}
+
 // to add and count pizzas
 function addPizzasToPanel(pizzaList) {
   pizzaList.forEach((pizza) => createPizzaCart(pizza));
@@ -349,3 +383,5 @@ function addPizzasToPanel(pizzaList) {
 addPizzasToPanel(pizza_info);
 
 addToBasket();
+handlePizzaAmount();
+handleRemovingPizza();
