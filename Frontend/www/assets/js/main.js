@@ -156,6 +156,10 @@ function addToBasket() {
       const pizzaAmount = 1;
 
       if (!isAlreadyInOrder) {
+        //count pizzas in order list
+        const pizzasAmount = document.getElementById("order-list-pizza-amount");
+        pizzasAmount.innerText++;
+
         const pizzaCardInOrder = `
         <div class="pizza-list-item">
             <img class="pizza-list-item-image" src="${imageSrc}" />
@@ -380,6 +384,10 @@ function handlePizzaAmount() {
         } else {
           const parentNode = event.target.closest(".pizza-list-item");
           parentNode.remove();
+          const pizzasAmount = document.getElementById(
+            "order-list-pizza-amount"
+          );
+          pizzasAmount.innerText--;
         }
       } else {
         const pizzaAmount = event.target.previousElementSibling.innerText;
@@ -396,18 +404,10 @@ function handleRemovingPizza() {
     if (event.target && event.target.id === "remove-pizza") {
       const parentNode = event.target.closest(".pizza-list-item");
       parentNode.remove();
+      const pizzasAmount = document.getElementById("order-list-pizza-amount");
+      pizzasAmount.innerText--;
     }
   });
-}
-function getNextSiblingById(element, id) {
-  let sibling = element.nextElementSibling;
-  while (sibling) {
-    if (sibling.id === id) {
-      return sibling;
-    }
-    sibling = sibling.nextElementSibling;
-  }
-  return null; // No sibling with the given ID found
 }
 
 // to add and count pizzas
@@ -416,8 +416,22 @@ function addPizzasToPanel(pizzaList) {
   handleFilterAmount(pizzaList.length);
 }
 
+//clear order list
+function clearOrderList() {
+  const clearOrderList = document.querySelector(".clear");
+  clearOrderList.addEventListener("click", () => {
+    const parentElement = document.getElementById("pizza-list-order");
+    while (parentElement.hasChildNodes()) {
+      parentElement.removeChild(parentElement.firstChild);
+    }
+    const pizzasAmount = document.getElementById("order-list-pizza-amount");
+    pizzasAmount.innerText = 0;
+  });
+}
+
 addPizzasToPanel(pizza_info);
 
 addToBasket();
 handlePizzaAmount();
 handleRemovingPizza();
+clearOrderList();
