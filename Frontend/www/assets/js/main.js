@@ -102,6 +102,11 @@ function addToBasket() {
     ) {
       const id = event.target.id;
 
+      const pizzaTitles = document.querySelectorAll(".pizza-list-item-title");
+      pizzaTitles.forEach((titleElement) => {
+        titleElement.innerText;
+      });
+
       const parentNode = event.target.closest(".col-sm-6");
       const pizzaImgElement = parentNode.querySelector(".pizza-card-img");
       const pizzaTitleElement = parentNode.querySelector(".pizza-title");
@@ -126,34 +131,55 @@ function addToBasket() {
       const pizzaWeight = pizzaWeightElement.innerText;
       const pizzaPrice = pizzaPriceElement.innerText;
 
-      console.log(pizzaSizeElement);
+      const wholePizzaTitle = `${pizzaTitle} (${
+        id === "buy-small-pizza" ? "Мала" : "Велика"
+      })`;
+
+      const pizzaTitlesArray = document.querySelectorAll(
+        ".pizza-list-item-title"
+      );
+
+      let isAlreadyInOrder = false;
+
+      pizzaTitlesArray.forEach((titleElement) => {
+        if (titleElement.innerText === wholePizzaTitle) {
+          isAlreadyInOrder = true;
+          const amountContainer =
+            titleElement.nextElementSibling.nextElementSibling;
+
+          const amountElement = amountContainer.querySelector("#pizza-amount");
+          amountElement.innerText = parseInt(amountElement.innerText) + 1;
+        }
+      });
+
+      // console.log(pizzaSizeElement);
       const pizzaAmount = 1;
 
-      const pizzaCardInOrder = `
-      <div class="pizza-list-item">
+      if (!isAlreadyInOrder) {
+        const pizzaCardInOrder = `
+        <div class="pizza-list-item">
             <img class="pizza-list-item-image" src="${imageSrc}" />
-            <h4 class="pizza-list-item-title">${pizzaTitle} (${
-        id === "buy-small-pizza" ? "Мала" : "Велика"
-      })</h4>
+            <h4 class="pizza-list-item-title">${wholePizzaTitle}</h4>
             <div class="pizza-list-item-icons">
-              <p><img src="./assets//images//size-icon.svg" alt="size" />${pizzaSize}</p>
+            <p><img src="./assets//images//size-icon.svg" alt="size" />${pizzaSize}</p>
               <p><img src="./assets/images/weight.svg" alt="weight" />${pizzaWeight}</p>
             </div>
             <div class="pizza-list-item-price_amount">
-              <h3>${pizzaPrice}грн</h3>
+            <h3>${pizzaPrice}грн</h3>
               <button class="pizza-list-item-add_delete" id="decrease-pizza" type="button">-</button>
-              <h3>${pizzaAmount}</h3>
+              <h3 id="pizza-amount">${pizzaAmount}</h3>
               <button class="pizza-list-item-add_delete green" id="increase-pizza" type="button">
                 +
               </button>
               <button class="pizza-list-item-add_delete delete" id="remove-pizza" type="button">
-                +
+              +
               </button>
-            </div>
+              </div>
       </div>
-    `;
-      const pizzaListOrder = document.getElementById("pizza-list-order");
-      pizzaListOrder.innerHTML += pizzaCardInOrder;
+      `;
+        const pizzaListOrder = document.getElementById("pizza-list-order");
+        pizzaListOrder.innerHTML += pizzaCardInOrder;
+      }
     }
   });
 }
@@ -372,6 +398,16 @@ function handleRemovingPizza() {
       parentNode.remove();
     }
   });
+}
+function getNextSiblingById(element, id) {
+  let sibling = element.nextElementSibling;
+  while (sibling) {
+    if (sibling.id === id) {
+      return sibling;
+    }
+    sibling = sibling.nextElementSibling;
+  }
+  return null; // No sibling with the given ID found
 }
 
 // to add and count pizzas
