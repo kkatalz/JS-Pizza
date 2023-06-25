@@ -155,6 +155,10 @@ function addToBasket() {
       // console.log(pizzaSizeElement);
       const pizzaAmount = 1;
 
+      const pizzaReceipt = document.getElementById("receipt-to-pay");
+      pizzaReceipt.innerText =
+        parseInt(pizzaReceipt.innerText) + parseInt(pizzaPrice);
+
       if (!isAlreadyInOrder) {
         //count pizzas in order list
         const pizzasAmount = document.getElementById("order-list-pizza-amount");
@@ -379,6 +383,13 @@ function handlePizzaAmount() {
     ) {
       if (event.target && event.target.id === "decrease-pizza") {
         const pizzaAmount = event.target.nextElementSibling.innerText;
+
+        //recalculate pizza's receipt
+        const pizzaPrice = event.target.previousElementSibling.innerText;
+        const pizzaReceipt = document.getElementById("receipt-to-pay");
+        pizzaReceipt.innerText =
+          parseInt(pizzaReceipt.innerText) - parseInt(pizzaPrice);
+
         if (pizzaAmount != 1) {
           event.target.nextElementSibling.innerText = parseInt(pizzaAmount) - 1;
         } else {
@@ -393,6 +404,14 @@ function handlePizzaAmount() {
         const pizzaAmount = event.target.previousElementSibling.innerText;
         event.target.previousElementSibling.innerText =
           parseInt(pizzaAmount) + 1;
+
+        //recalculate pizza's receipt
+        const pizzaPrice =
+          event.target.previousElementSibling.previousElementSibling
+            .previousElementSibling.innerText;
+        const pizzaReceipt = document.getElementById("receipt-to-pay");
+        pizzaReceipt.innerText =
+          parseInt(pizzaReceipt.innerText) + parseInt(pizzaPrice);
       }
     }
   });
@@ -406,6 +425,17 @@ function handleRemovingPizza() {
       parentNode.remove();
       const pizzasAmount = document.getElementById("order-list-pizza-amount");
       pizzasAmount.innerText--;
+
+      //recalculate pizza's receipt
+      const pizzaPrice =
+        event.target.previousElementSibling.previousElementSibling
+          .previousElementSibling.previousElementSibling.innerText;
+      const pizzaAmount =
+        event.target.previousElementSibling.previousElementSibling.innerText;
+      const pizzaReceipt = document.getElementById("receipt-to-pay");
+      pizzaReceipt.innerText =
+        parseInt(pizzaReceipt.innerText) -
+        parseInt(pizzaPrice) * parseInt(pizzaAmount);
     }
   });
 }
@@ -426,6 +456,10 @@ function clearOrderList() {
     }
     const pizzasAmount = document.getElementById("order-list-pizza-amount");
     pizzasAmount.innerText = 0;
+
+    //recalculate pizza's receipt
+    const pizzaReceipt = document.getElementById("receipt-to-pay");
+    pizzaReceipt.innerText = 0;
   });
 }
 
